@@ -5,6 +5,7 @@ https://docs.djangoproject.com/en/dev/topics/email/
 
 
 # ---------------------- Setting.py
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
@@ -60,7 +61,7 @@ def subscribe(request):
                       , settings.EMAIL_HOST_USER
                       , [recipient]
                       , fail_silently=False
-                      html_message='<H3>hi bahador </h3>'
+                      , html_message='<H3>hi bahador </h3>'
                      )
             messages.success(request, 'Success!')
             return redirect('URL_PAGE_REDIRECT')  # URL_PAGE_REDIRECT
