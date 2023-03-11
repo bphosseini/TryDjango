@@ -45,14 +45,14 @@ def subscribe(request):
             
             
             # send_mail(subject
-                        , message
-                        , from_email
-                        , recipient_list
-                        , fail_silently=False #raise an smtplib.SMTPException if an error occurs.
-                        , auth_user=None
-                        , auth_password=None
-                        , connection=None
-                        , html_message=None
+                        , message  # string
+                        , from_email  # string
+                        , recipient_list [ '....','....'] list if Email Address
+                        , fail_silently=False #if True raise an smtplib.SMTPException if an error occurs.
+                        , auth_user=None  # string
+                        , auth_password=None  # string
+                        , connection=None # string
+                        , html_message=None  # render_to_string('.....html',context={'...':var})
                )
 
 
