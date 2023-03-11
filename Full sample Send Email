@@ -1,3 +1,6 @@
+https://docs.djangoproject.com/en/dev/topics/email/
+
+
 # Enable Two Factor Authentication and setup an App Password in Gmail.
 
 
@@ -35,11 +38,48 @@ def subscribe(request):
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
         if form.is_valid():
-            subject = 'Code Band'
-            message = 'Sending Email through Gmail'
-            recipient = form.cleaned_data.get('email')
-            send_mail(subject, 
-              message, settings.EMAIL_HOST_USER, [recipient], fail_silently=False)
+            subject = '........' # YOU CAN CUSTOM FROM AMTHER VAR
+            message = 'Sending Email Gmail' # YOU CAN CUSTOM FROM AMTHER VAR
+            recipient = form.cleaned_data.get('email') # YOU CAN CUSTOM FROM AMTHER VAR
+            
+            
+            # send_mail(subject
+                        , message
+                        , from_email
+                        , recipient_list
+                        , fail_silently=False #raise an smtplib.SMTPException if an error occurs.
+                        , auth_user=None
+                        , auth_password=None
+                        , connection=None
+                        , html_message=None
+               )
+
+
+            send_mail(subject
+                      ,message
+                      , settings.EMAIL_HOST_USER
+                      , [recipient]
+                      , fail_silently=False
+                      html_message='<H3>hi bahador </h3>'
+                     )
             messages.success(request, 'Success!')
-            return redirect('subscribe')
-    return render(request, 'subscriptions/home.html', {'form': form})
+            return redirect('URL_PAGE_REDIRECT')  # URL_PAGE_REDIRECT
+    return render(request, 'YOUR_ADDRESS_TEMPLATE.html', {'form': form}) # URL_PAGE_RENDER
+
+
+# ---------------------- page.py
+<body>
+<main>
+    <h1>Subscribe</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: red">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    <form action="{% url 'subscribe' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+</main>
+</body>
